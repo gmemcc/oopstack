@@ -1,0 +1,68 @@
+basePath: /
+definitions:
+  main.ErrorResponse:
+    properties:
+      message:
+        description: Error message
+        example: Invalid request
+        type: string
+    type: object
+  main.GreetingResponse:
+    properties:
+      greeting:
+        description: |-
+          The personalized greeting message.
+          Example: Hello Alex
+        example: Hello Alex
+        type: string
+    type: object
+  main.NameRequest:
+    properties:
+      name:
+        description: |-
+          Name of the person to greet.
+          Required: true
+        example: Alex
+        type: string
+    type: object
+host: localhost:1323
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+    url: http://www.example.com/support
+  description: This is a sample server.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://example.com/terms/
+  title: Echo OpenAPI Example
+  version: "1.0"
+paths:
+  /api/hello:
+    post:
+      consumes:
+      - application/json
+      description: Responds with a personalized greeting message
+      parameters:
+      - description: Name in JSON
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/main.NameRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            $ref: '#/definitions/main.GreetingResponse'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: Greet the user
+      tags:
+      - greeting
+swagger: "2.0"

@@ -1,0 +1,94 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server.",
+        "title": "Echo OpenAPI Example",
+        "termsOfService": "http://example.com/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.example.com/support",
+            "email": "support@example.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:1323",
+    "basePath": "/",
+    "paths": {
+        "/api/hello": {
+            "post": {
+                "description": "Responds with a personalized greeting message",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "greeting"
+                ],
+                "summary": "Greet the user",
+                "parameters": [
+                    {
+                        "description": "Name in JSON",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.NameRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/main.GreetingResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/main.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "Error message",
+                    "type": "string",
+                    "example": "Invalid request"
+                }
+            }
+        },
+        "main.GreetingResponse": {
+            "type": "object",
+            "properties": {
+                "greeting": {
+                    "description": "The personalized greeting message.\nExample: Hello Alex",
+                    "type": "string",
+                    "example": "Hello Alex"
+                }
+            }
+        },
+        "main.NameRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the person to greet.\nRequired: true",
+                    "type": "string",
+                    "example": "Alex"
+                }
+            }
+        }
+    }
+}
